@@ -22,6 +22,7 @@ function Signin() {
       <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
         Sign In
       </Button>
+      <a href="#/">Don&apos;t have an account, use this link to register.</a>
     </div>
   );
 }
