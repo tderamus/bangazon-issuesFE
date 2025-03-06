@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import firebase from 'firebase/app';
 import Link from 'next/link';
 import {
   Navbar, //
@@ -10,10 +11,12 @@ import {
 import { signOut } from '../utils/auth';
 
 export default function NavBar() {
+  const user = firebase.auth().currentUser;
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Link passHref href="/">
+        <Link passHref href={`/UserProfile/${user.uid}`}>
           <Navbar.Brand>Welcome to the Bangazon App</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -23,8 +26,8 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
-            <Link passHref href="/delete-me">
-              <Nav.Link>Delete Me</Nav.Link>
+            <Link passHref href={`/UserProfile/${user.uid}`}>
+              <Nav.Link>User Profile</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out
