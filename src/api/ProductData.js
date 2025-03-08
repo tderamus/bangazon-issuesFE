@@ -13,11 +13,8 @@ const getSeedData = () => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data) {
-        resolve(Object.values(data));
-      } else {
-        resolve([]);
-      }
+      console.warn('Seed Data', data);
+      resolve(data);
     })
     .catch((error) => reject(error));
 });

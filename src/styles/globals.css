@@ -20,3 +20,16 @@ a {
 body {
   background-color: #88effd;
 }
+
+.seed-product-card-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+}
+
+.seed-product-image{
+  background-color: black;
+  height: 20rem;
+}

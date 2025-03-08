@@ -5,8 +5,8 @@ import { getSeedData, getProductData } from '../src/api/ProductData';
 import SeedProductCard from '../src/components/SeedProductCard';
 
 function Home() {
-  const [seedData, setSeedData] = useState([]);
-  const [productData, setProductData] = useState([]);
+  const [seedData, setSeedData] = useState({ products: [] });
+  // const [productData, setProductData] = useState([]);
 
   useEffect(() => {
     getSeedData()
@@ -21,7 +21,7 @@ function Home() {
     getProductData()
       .then((data) => {
         console.warn('Product Data', data);
-        setProductData(data);
+        // setProductData(data);
       })
       .catch((error) => {
         console.error('Error fetching product data:', error);
@@ -30,17 +30,19 @@ function Home() {
 
   return (
     <>
-      <div>
+      <div className="seed-data-container">
         <h1>Welcome to Bangazon Products catalog. Enjoy shopping with us!</h1>
       </div>
-      <div>
-        {seedData.map((seedproducts) => (
-          <SeedProductCard key={seedproducts.id} SeedDataObj={seedproducts} onUpdate={getSeedData} />
-        ))}
-      </div>
-      <div>
-        {productData.map((products) => (
-          <SeedProductCard key={products.id} SeedDataObj={products} onUpdate={getProductData} />
+      <div className="seed-product-card-container">
+        {seedData.products.map((product) => (
+          <SeedProductCard
+            key={product.id}
+            title={product.title}
+            category={product.category}
+            price={product.price}
+            image={product.images[0]}
+            onUpdate={getSeedData}
+          />
         ))}
       </div>
       <div
