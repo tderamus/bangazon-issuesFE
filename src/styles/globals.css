@@ -33,3 +33,11 @@ body {
   background-color: black;
   height: 20rem;
 }
+
+.register-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20vh;
+  margin-top: 10rem;
+}

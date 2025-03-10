@@ -26,8 +26,11 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
-            <Link passHref href={`/UserProfile/${user.uid}`}>
-              <Nav.Link>User Profile</Nav.Link>
+            <Link passHref href={`/CustomerProfile/${user.uid}`}>
+              <Nav.Link>Customer Profile</Nav.Link>
+            </Link>
+            <Link passHref href={`/SellerProfile/${user.uid}`}>
+              <Nav.Link>Seller Profile</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out

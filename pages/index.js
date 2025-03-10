@@ -1,17 +1,18 @@
 import { Button } from 'react-bootstrap';
+import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 import { signOut } from '../src/utils/auth';
 import { getSeedData, getProductData } from '../src/api/ProductData';
 import SeedProductCard from '../src/components/SeedProductCard';
 
 function Home() {
+  const user = firebase.auth().currentUser;
   const [seedData, setSeedData] = useState({ products: [] });
-  // const [productData, setProductData] = useState([]);
+  const [productData, setProductData] = useState([]);
 
   useEffect(() => {
     getSeedData()
       .then((data) => {
-        console.warn('Seed Data', data);
         setSeedData(data);
       })
       .catch((error) => {
@@ -20,8 +21,8 @@ function Home() {
 
     getProductData()
       .then((data) => {
-        console.warn('Product Data', data);
-        // setProductData(data);
+        setProductData(data);
+        console.warn('Product Data', productData);
       })
       .catch((error) => {
         console.error('Error fetching product data:', error);
@@ -30,6 +31,19 @@ function Home() {
 
   return (
     <>
+      <div className="register-container">
+        <div className="register-seller-container">
+          <h1>Register Seller Account</h1>
+          <Button type="button" className="btn btn-primary" size="lg" />
+          <a href={`/RegisterNewSeller/${user.uid}`} style={{ color: 'white', textDecoration: 'none' }}>Register</a>
+        </div>
+        <div className="register-customer-container">
+          <h1>Register Customer Account</h1>
+          <Button variant="primary" type="button" size="lg" className="copy-btn" />
+          <a href={`/RegisterNewCustomer/${user.uid}`} style={{ color: 'white', textDecoration: 'none' }}>Register</a>
+        </div>
+      </div>
+
       <div className="seed-data-container">
         <h1>Welcome to Bangazon Products catalog. Enjoy shopping with us!</h1>
       </div>

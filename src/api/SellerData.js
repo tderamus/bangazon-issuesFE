@@ -1,9 +1,9 @@
 import { clientCredentials } from '../utils/client';
 
-// Get the customer data from the database
+// Get the seller data from the database
 const endpoint = clientCredentials.databaseURL;
-const getCustomerData = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/customers`, {
+const getSellerData = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/sellers`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -12,16 +12,16 @@ const getCustomerData = () => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.warn('Customer Data', data);
+      console.warn('seller Data', data);
       resolve(data);
     })
     .catch((error) => reject(error));
 });
 
-// Create a new customer if they don't exist
-const createNewCustomer = (formInput) => new Promise((resolve, reject) => {
+// Create a new seller if they don't exist
+const createNewSeller = (formInput) => new Promise((resolve, reject) => {
   console.warn('Form Input', formInput);
-  fetch(`${endpoint}/api/customers`, {
+  fetch(`${endpoint}/api/sellers`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -36,15 +36,15 @@ const createNewCustomer = (formInput) => new Promise((resolve, reject) => {
       return response.json().catch(() => ({})); // Handle empty response body
     })
     .then((data) => {
-      console.warn('Customer API Data', data);
+      console.warn('seller API Data', data);
       resolve(data);
     })
     .catch((error) => reject(error));
 });
 
-// Update customer data
-const updateCustomerData = (formInput) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/customers/${formInput.uid}`, {
+// Update seller data
+const updateSellerData = (formInput) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/sellers/${formInput.uid}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -59,10 +59,10 @@ const updateCustomerData = (formInput) => new Promise((resolve, reject) => {
       return response.json().catch(() => ({})); // Handle empty response body
     })
     .then((data) => {
-      console.warn('Customer API Data', data);
+      console.warn('seller API Data', data);
       resolve(data);
     })
     .catch((error) => reject(error));
 });
 
-export { createNewCustomer, getCustomerData, updateCustomerData };
+export { createNewSeller, getSellerData, updateSellerData };
