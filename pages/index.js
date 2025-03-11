@@ -4,11 +4,29 @@ import { useEffect, useState } from 'react';
 import { signOut } from '../src/utils/auth';
 import { getSeedData, getProductData } from '../src/api/ProductData';
 import SeedProductCard from '../src/components/SeedProductCard';
+import { getCustomerById } from '../src/api/CustomerData';
 
 function Home() {
   const user = firebase.auth().currentUser;
   const [seedData, setSeedData] = useState({ products: [] });
   const [productData, setProductData] = useState([]);
+  const [registeredCustomer, setRegisteredCustomer] = useState(false);
+
+  useEffect(() => {
+    if (user && user.uid) {
+      getCustomerById(user.uid)
+        .then((data) => {
+          if (user.uid === data.uid) {
+            setRegisteredCustomer(true);
+          } else {
+            setRegisteredCustomer(false);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching customer data:', error);
+        });
+    }
+  }, [user]);
 
   useEffect(() => {
     getSeedData()
@@ -22,12 +40,11 @@ function Home() {
     getProductData()
       .then((data) => {
         setProductData(data);
-        console.warn('Product Data', productData);
       })
       .catch((error) => {
         console.error('Error fetching product data:', error);
       });
-  }, []);
+  }, [productData]);
 
   return (
     <>
@@ -35,12 +52,16 @@ function Home() {
         <div className="register-seller-container">
           <h1>Register Seller Account</h1>
           <Button type="button" className="btn btn-primary" size="lg" />
-          <a href={`/RegisterNewSeller/${user.uid}`} style={{ color: 'white', textDecoration: 'none' }}>Register</a>
+          <a href={`/RegisterNewSeller/${user.uid}`} style={{ color: 'Black', margin: '1px', textDecoration: 'none' }}>
+            {registeredCustomer ? 'Signin' : 'Register'}
+          </a>
         </div>
         <div className="register-customer-container">
-          <h1>Register Customer Account</h1>
+          <h1>{registeredCustomer ? 'Login To Customer Account' : 'Register For A Customer Account'}</h1>
           <Button variant="primary" type="button" size="lg" className="copy-btn" />
-          <a href={`/RegisterNewCustomer/${user.uid}`} style={{ color: 'white', textDecoration: 'none' }}>Register</a>
+          <a href={`/RegisterNewCustomer/${user.uid}`} style={{ color: 'Black', textDecoration: 'none' }}>
+            {registeredCustomer ? 'Signin' : 'Register'}
+          </a>
         </div>
       </div>
 
@@ -48,16 +69,20 @@ function Home() {
         <h1>Welcome to Bangazon Products catalog. Enjoy shopping with us!</h1>
       </div>
       <div className="seed-product-card-container">
-        {seedData.products.map((product) => (
-          <SeedProductCard
-            key={product.id}
-            title={product.title}
-            category={product.category}
-            price={product.price}
-            image={product.images[0]}
-            onUpdate={getSeedData}
-          />
-        ))}
+        {seedData.products && seedData.products.length > 0 ? (
+          seedData.products.map((product) => (
+            <SeedProductCard
+              key={product.id}
+              title={product.title}
+              category={product.category}
+              price={product.price}
+              image={product.images[0]}
+              onUpdate={getSeedData}
+            />
+          ))
+        ) : (
+          <p>No products available.</p>
+        )}
       </div>
       <div
         className="text-center d-flex flex-column justify-content-center align-content-center"
