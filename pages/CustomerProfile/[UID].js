@@ -35,7 +35,7 @@ export default function CustomerProfile() {
   return (
     <div className="customer-profile-container">
       {registeredCustomer && customer ? (
-        <><h1>{user.displayName} Profile Page</h1><CustomerProfileCard customerObj={customer} /></>
+        <><h1>{user.displayName} Customer Profile Page</h1><CustomerProfileCard customerObj={customer} /></>
       ) : (
         <div>
           <h1>Welcome, {user ? user.displayName : 'Guest'}</h1>

@@ -69,7 +69,7 @@ function Home() {
           ) : (
             <>
               <Button variant="primary" type="button" size="lg" className="copy-btn" />
-              <a href={`/RegisterNewSeller/${user.uid}`} style={{ color: 'Black', textDecoration: 'none' }}>Register New Customer</a>
+              <a href={`/RegisterNewSeller/${user.uid}`} style={{ color: 'Black', textDecoration: 'none' }}>Register New Seller Account</a>
             </>
           )}
         </h1>
@@ -85,7 +85,7 @@ function Home() {
             ) : (
               <>
                 <Button variant="primary" type="button" size="lg" className="copy-btn" />
-                <a href={`/RegisterNewCustomer/${user.uid}`} style={{ color: 'Black', textDecoration: 'none' }}>Register New Customer</a>
+                <a href={`/RegisterNewCustomer/${user.uid}`} style={{ color: 'Black', textDecoration: 'none' }}>Register New Customer Account</a>
               </>
             )}
           </h1>
