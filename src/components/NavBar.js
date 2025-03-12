@@ -16,7 +16,7 @@ export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Link passHref href={`/UserProfile/${user.uid}`}>
+        <Link passHref href="/">
           <Navbar.Brand>Welcome to the Bangazon App</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
