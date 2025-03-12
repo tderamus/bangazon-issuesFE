@@ -1,7 +1,7 @@
 import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
-const seedDataEndpoint = 'https://dummyjson.com/products?limit=10';
+const seedDataEndpoint = 'https://dummyjson.com/products?limit=30';
 
 // Get seed data from the API
 const getSeedData = () => new Promise((resolve, reject) => {

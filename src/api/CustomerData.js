@@ -65,21 +65,16 @@ const updateCustomerData = (formInput) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const getCustomerById = (uid) => {
-  fetch(`${endpoint}/api/customers/${uid}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include', // Allow cookies/session to be sent
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.warn('Customer Data', data);
-      return data;
-    })
-    .catch((error) => error);
-};
+const getCustomerById = (uid) => fetch(`${endpoint}/api/customers/${uid}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  credentials: 'include', // Allow cookies/session to be sent
+})
+  .then((response) => response.json())
+  .then((data) => data)
+  .catch((error) => error);
 
 export {
   createNewCustomer, getCustomerData, updateCustomerData, getCustomerById,
