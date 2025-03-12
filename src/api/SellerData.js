@@ -18,6 +18,18 @@ const getSellerData = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+// Get seller data by ID
+const getSellerById = (uid) => fetch(`${endpoint}/api/sellers/${uid}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  credentials: 'include', // Allow cookies/session to be sent
+})
+  .then((response) => response.json())
+  .then((data) => data)
+  .catch((error) => error);
+
 // Create a new seller if they don't exist
 const createNewSeller = (formInput) => new Promise((resolve, reject) => {
   console.warn('Form Input', formInput);
@@ -65,4 +77,6 @@ const updateSellerData = (formInput) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { createNewSeller, getSellerData, updateSellerData };
+export {
+  createNewSeller, getSellerData, updateSellerData, getSellerById,
+};

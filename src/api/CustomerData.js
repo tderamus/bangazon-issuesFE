@@ -65,4 +65,17 @@ const updateCustomerData = (formInput) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { createNewCustomer, getCustomerData, updateCustomerData };
+const getCustomerById = (uid) => fetch(`${endpoint}/api/customers/${uid}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  credentials: 'include', // Allow cookies/session to be sent
+})
+  .then((response) => response.json())
+  .then((data) => data)
+  .catch((error) => error);
+
+export {
+  createNewCustomer, getCustomerData, updateCustomerData, getCustomerById,
+};

@@ -18,10 +18,10 @@ function SeedProductCard({
           <Card.Text>{category}</Card.Text>
           <Card.Text>{price}</Card.Text>
         </Card.Body>
-        <button type="button" onClick={onUpdate} className="btn btn-primary">Update</button>
+        <button type="button" onClick={onUpdate} className="btn btn-success">CHECKOUT</button>
         <Card.Body>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
+          <button type="button" onClick={onUpdate} className="btn btn-primary m-4 btn-lg">🛒</button>
+          <button type="button" onClick={onUpdate} className="btn btn-info m-5 btn-lg">ℹ</button>
         </Card.Body>
       </Card>
     </>
